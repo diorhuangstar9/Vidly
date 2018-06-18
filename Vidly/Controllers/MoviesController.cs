@@ -110,9 +110,9 @@ namespace Vidly.Controllers
 //            if (string.IsNullOrEmpty(sortBy))
 //                sortBy = "Name";
 //            return Content(string.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
-            var movies = _context.Movies.Include(m => m.Genre).ToList();
+            //var movies = _context.Movies.Include(m => m.Genre).ToList();
 
-            return View(movies);
+            return View();
         }
 
         [Route("movies/released/{year:regex(\\d{4})}/{month:range(1,12)}")]
