@@ -1,0 +1,42 @@
+﻿@model List<Vidly.Models.Movie>
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table id="movies" class="table table-bordered table-hover">
+    <thead>
+    <th>Movie</th>
+    <th>Genre</th>
+    </thead>
+    <tbody>
+    </tbody>
+        
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function() {
+            var table = $("#movies").DataTable(
+                {
+                    ajax: {
+                        url: "/api/movies",
+                        dataSrc: ""
+                    },
+                    columns: [
+                        {
+                            data: "name"
+                        },
+                        {
+                            data: "genre.name"
+                        }
+                    ]
+                }
+            );
+
+        });
+    </script>
+
+
+}

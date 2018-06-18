@@ -45,6 +45,7 @@ namespace Vidly.Controllers
             //return RedirectToAction("Index", "Home", new { page=1, sortBy = "name"});
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var Genres = _context.Genres.ToList();
@@ -111,8 +112,10 @@ namespace Vidly.Controllers
 //                sortBy = "Name";
 //            return Content(string.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
             //var movies = _context.Movies.Include(m => m.Genre).ToList();
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
 
-            return View();
+            return View("ReadOnlyList");
         }
 
         [Route("movies/released/{year:regex(\\d{4})}/{month:range(1,12)}")]
